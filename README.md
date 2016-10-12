@@ -49,7 +49,7 @@
 
 ### 三种组件类型
 
-1. **React.createClass**
+#### **React.createClass**
  
 ```js
 import React, { Component } from 'react'
@@ -92,7 +92,7 @@ var TickTock = React.createClass({
 });
 ```
 
-2. **ES6 Classes  export class Name extends React.Component**
+#### **ES6 Classes  export class Name extends React.Component**
 ```js
 import React, { Component, PropTypes } from 'react'
 
@@ -145,7 +145,7 @@ App.defaultProps = {
 App.value = 1
 ```
 
-3. **纯函数（pure funciton） stateless-functions**
+#### **纯函数（pure funciton） stateless-functions**
 
 适用于无 state 的组件
 ```js
