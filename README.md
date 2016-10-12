@@ -4,9 +4,9 @@
   - [局限性（不支持功能）](#局限性（不支持功能）)
   - [本项目简介 ](#本项目简介 )
 - [三种组件类型 ](#三种组件类型 )
-  - [React.createClass](#React.createClass)
-  - [ES6 Classes  export class Name extends React.Component](#ES6 Classes  export class Name extends React.Component)
-  - [纯函数（pure funciton） stateless-functions](#纯函数（pure funciton） stateless-functions)
+  - [React.createClass](#reactcreateclass)
+  - [ES6 Classes  export class Name extends React.Component](#es6-classes--export-class-name-extends-reactcomponent)
+  - [纯函数（pure funciton） stateless-functions](#纯函数pure-funciton-stateless-functions)
 - [小知识点 ](#小知识点 )
   - [className 和 style ](#className 和 style )
   - [JXS 注释 ](#JXS 注释 )
@@ -14,6 +14,15 @@
   - [修改组件 state ](#修改组件 state )
   - [JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理](#JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理)
 - [生命周期 ](#生命周期 )
+  - [Mounting: componentWillMount ](#生命周期 )
+  - [Mounting: componentDidMount ](#生命周期 )
+  - [Updating: componentWillReceiveProps(nextProps) ](#生命周期 )
+  - [Updating: shouldComponentUpdate(nextProps, nextState) ](#生命周期 )
+  - [Updating: componentWillUpdate(nextProps, nextState) ](#生命周期 )
+  - [Updating: componentDidUpdate(prevProps, prevState) ](#生命周期 )
+  - [Unmounting: componentWillUnmount ](#生命周期 )
+  - [render() ](#生命周期 )
+
 
 
 ### 快速开始
@@ -171,7 +180,7 @@ ReactDOM.render(
 
 ### 小知识点
 
-1. **className 和 style**
+#### **className 和 style**
 
     ```js
       render(){
@@ -197,7 +206,7 @@ ReactDOM.render(
       }
     ```
 
-2. **JXS 注释**
+#### **JXS 注释**
 
     ```js
       render(){
@@ -209,7 +218,7 @@ ReactDOM.render(
       }
     ```
 
-3. **DOM 操作**
+#### **DOM 操作**
 
     [ReactDOM.findDOMNode](https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode)
     
@@ -249,7 +258,7 @@ ReactDOM.render(
           }
       }
     ```
-4. **修改组件 state**
+#### **修改组件 state**
 
     要想修改 this.state 必须通过 this.setState 函数进行设置
     ```js
@@ -280,7 +289,7 @@ ReactDOM.render(
     ```
     [MDN 对于 bind 的介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
-5. **JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理**
+#### **JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理**
 
     JSX 中使用三元运算符
     ```js
@@ -314,15 +323,15 @@ ReactDOM.render(
 对于生命周期的理解很重要，生命周期贯彻 react 组件的整个使用过程
 ![](./images/react_lifecycle.png)
 
-1. **Mounting: componentWillMount**
+#### **Mounting: componentWillMount**
 
     可以在这个函数中发情数据请求，此时进行 setState() render() 将只执行一次
 
-2. **Mounting: componentDidMount**
+#### **Mounting: componentDidMount**
 
     第一次 render() 执行后，此时可以读取对真实DOM进行相关操作
 
-3. **Updating: componentWillReceiveProps(nextProps)**
+#### **Updating: componentWillReceiveProps(nextProps)**
 
     当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
 
@@ -331,24 +340,24 @@ ReactDOM.render(
     | this.props | 老的 props |
     | nextProps | 新的 props |
 
-4. **Updating: shouldComponentUpdate(nextProps, nextState)**
+#### **Updating: shouldComponentUpdate(nextProps, nextState)**
   
     如果配置该函数的话必须明确的返回 true 或者 false ，返回决定了本次变化是否引起组件重绘（及执行 render()）。
     在此函数中可以进行逻辑性的判断来减少组件重绘的次数
 
-5. **Updating: componentWillUpdate(nextProps, nextState)**
+#### **Updating: componentWillUpdate(nextProps, nextState)**
   
     请不要在此函数中执行修改 state 的逻辑（即调用 setState 函数），如有需要请在 componentWillReceiveProps 中进行修改设置
 
-6. **Updating: componentDidUpdate(prevProps, prevState)**
+#### **Updating: componentDidUpdate(prevProps, prevState)**
   
     完成组件更新（即完成本次更新重绘 render() 执行之后），此时可以进行 DOM 操作
 
-7. **Unmounting: componentWillUnmount**
+#### **Unmounting: componentWillUnmount**
   
     组件被销毁时调用，已经进行各种销毁逻辑
 
-8. **render()**
+#### **render()**
     
     必须返回唯一包裹组件
 
