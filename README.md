@@ -27,23 +27,23 @@
 
 因为 React 开发涉及 JSX 语法和ES6/7新语法还有开发环境和正式环境打包等等工作。建议新手可以使用 Facebook 官方推出的 [create-react-app](https://github.com/facebookincubator/create-react-app.git)快速开始学习基础知识和代码实践。等到实际项目开发时可以再深入的进行 webpack 定制化开发。
 
-  ```shell
-    //全局安装
-    npm install -g create-react-app
+```shell
+  //全局安装
+  npm install -g create-react-app
 
-    //创建项目
-    create-react-app my-app
-    cd my-app
+  //创建项目
+  create-react-app my-app
+  cd my-app
 
-    //运行
-    npm start
+  //运行
+  npm start
 
-    //测试
-    npm test
+  //测试
+  npm test
 
-    //打包
-    npm run build
-  ```
+  //打包
+  npm run build
+```
 #### 局限性（不支持功能）
 * Server rendering. 服务器端渲染
 * Some experimental syntax extensions (e.g. decorators).一些实验性的语法（例如：修饰器）
