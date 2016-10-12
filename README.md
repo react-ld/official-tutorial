@@ -1,8 +1,8 @@
-# React 入门一
+# React 入门基础
 
 ### 快速开始
 
-因为 React 开发涉及 JSX 语法和ES6/7新语法还有开发环境和正式环境打包等等工作。建议新手可以使用 Facebook 官方推出的 [create-react-app](https://github.com/facebookincubator/create-react-app.git)快速开始学习基础知识和代码实践。等到实际项目开发时可以在深入的进行 webpack 定制化开发。
+因为 React 开发涉及 JSX 语法和ES6/7新语法还有开发环境和正式环境打包等等工作。建议新手可以使用 Facebook 官方推出的 [create-react-app](https://github.com/facebookincubator/create-react-app.git)快速开始学习基础知识和代码实践。等到实际项目开发时可以再深入的进行 webpack 定制化开发。
 
   ```shell
     //全局安装
@@ -26,19 +26,39 @@
 * Some experimental syntax extensions (e.g. decorators).一些实验性的语法（例如：修饰器）
 * CSS Modules.
 * LESS or Sass.
-* Hot reloading of components.热更新
+* Hot reloading of components.热更新 本人自己开发的支持 redux hot reloading 项目[react-started](https://github.com/lidianhao123/react-started)
+
+#### 本项目简介
+  本项目就是使用[create-react-app](https://github.com/facebookincubator/create-react-app.git)创建的一个项目。主要实现了官方[tutorial](https://facebook.github.io/react/docs/tutorial.html)[react-tutorial](https://github.com/reactjs/react-tutorial)代码使用 ES5 Classes 方式来进行实现，可以进行一个比较。其中省略了服务器端数据请求的逻辑。
 
 ### 三种组件类型 
 
-1. *React.createClass*
+1. **React.createClass**
  
 ```js
 import React, { Component } from 'react'
 
 var TickTock = React.createClass({
+  //类属性和方法的设置
+  statics: {
+    customMethod: function(foo) {
+      return foo === 'bar';
+    }
+    value: 0
+  },
   //初始化 state 值
   getInitialState: function() {
     return {seconds: 0};
+  },
+  //定义 props 参数类型
+  propTypes: {
+    name: React.PropTypes.string
+  },
+  //设置 props 默认值
+  getDefaultProps: function() {
+    return {
+      name: 'Mary'
+    };
   },
   componentDidMount: function() {
     this.setInterval(this.tick, 1000); // Call a method on the mixin
@@ -56,11 +76,15 @@ var TickTock = React.createClass({
 });
 ```
 
-2. ES6 Classes  export class Name extends React.Component
+2. **ES6 Classes  export class Name extends React.Component**
 ```js
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class App extends Component{
+  //静态方法
+  static customMethod(foo){
+    return foo === 'bar';
+  }
   constructor(){
     super()
     //初始化 state 值
@@ -93,8 +117,21 @@ export default class App extends Component{
     );
   }
 }
+//定义 props 参数类型
+App.propTypes = {
+  name: PropTypes.string
+};
+//设置 props 默认值
+App.defaultProps = {
+  name: 'Mary'
+};
+//类属性
+App.value = 1
 ```
-3. 纯函数（pure funciton） stateless-functions 
+
+3. **纯函数（pure funciton） stateless-functions**
+
+适用于无 state 的组件
 ```js
 function Greeting(props) {
   return <h1>Hello, {props.name}</h1>;
@@ -111,12 +148,14 @@ ReactDOM.render(
 ```
 
 参考链接：
-https://facebook.github.io/react/docs/reusable-components.html
-http://codecloud.net/12913.html
+[component-specs](https://facebook.github.io/react/docs/component-specs.html)
+[reusable-components](https://facebook.github.io/react/docs/reusable-components.html)
+[选择组件类型](http://codecloud.net/12913.html)
+[阮一峰 ES6 教程 class](http://es6.ruanyifeng.com/#docs/class)
 
 ### 小知识点
 
-1. className 和 style
+1. **className 和 style**
 
     ```js
       render(){
@@ -142,7 +181,7 @@ http://codecloud.net/12913.html
       }
     ```
 
-2. JXS 注释
+2. **JXS 注释**
 
     ```js
       render(){
@@ -154,7 +193,7 @@ http://codecloud.net/12913.html
       }
     ```
 
-3. DOM 操作
+3. **DOM 操作**
 
     [ReactDOM.findDOMNode](https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode)
     
@@ -194,7 +233,7 @@ http://codecloud.net/12913.html
           }
       }
     ```
-4. 修改组件 state
+4. **修改组件 state**
 
     要想修改 this.state 必须通过 this.setState 函数进行设置
     ```js
@@ -225,19 +264,49 @@ http://codecloud.net/12913.html
     ```
     [MDN 对于 bind 的介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
+5. **JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理**
+
+    JSX 中使用三元运算符
+    ```js
+      render(){
+        return (
+          <div>
+            {
+              this.state.isShow ? <span>show Text</span> : ""
+            }
+          </div>
+        )
+      }
+    ```
+
+    使用变量独立处理
+    ```js
+      render(){
+        let content = "";
+        if(this.state.isShow){
+          content = <span>show Text</span>
+        }
+        return (
+          <div>
+            {content}
+          </div>
+        )
+      }
+    ```
+
 ### 生命周期
 对于生命周期的理解很重要，生命周期贯彻 react 组件的整个使用过程
 ![](./images/react_lifecycle.png)
 
-1. Mounting: componentWillMount
+1. **Mounting: componentWillMount**
 
     可以在这个函数中发情数据请求，此时进行 setState() render() 将只执行一次
 
-2. Mounting: componentDidMount
+2. **Mounting: componentDidMount**
 
     第一次 render() 执行后，此时可以读取对真实DOM进行相关操作
 
-3. Updating: componentWillReceiveProps(nextProps)
+3. **Updating: componentWillReceiveProps(nextProps)**
 
     当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
 
@@ -246,24 +315,24 @@ http://codecloud.net/12913.html
     | this.props | 老的 props |
     | nextProps | 新的 props |
 
-4. Updating: shouldComponentUpdate(nextProps, nextState)
+4. **Updating: shouldComponentUpdate(nextProps, nextState)**
   
     如果配置该函数的话必须明确的返回 true 或者 false ，返回决定了本次变化是否引起组件重绘（及执行 render()）。
     在此函数中可以进行逻辑性的判断来减少组件重绘的次数
 
-5. Updating: componentWillUpdate(nextProps, nextState)
+5. **Updating: componentWillUpdate(nextProps, nextState)**
   
     请不要在此函数中执行修改 state 的逻辑（即调用 setState 函数），如有需要请在 componentWillReceiveProps 中进行修改设置
 
-6. Updating: componentDidUpdate(prevProps, prevState)
+6. **Updating: componentDidUpdate(prevProps, prevState)**
   
     完成组件更新（即完成本次更新重绘 render() 执行之后），此时可以进行 DOM 操作
 
-7. Unmounting: componentWillUnmount
+7. **Unmounting: componentWillUnmount**
   
     组件被销毁时调用，已经进行各种销毁逻辑
 
-8. render()
+8. **render()**
     
     必须返回唯一包裹组件
 
@@ -296,3 +365,9 @@ http://codecloud.net/12913.html
 
 参考链接：
 https://facebook.github.io/react/docs/component-specs.html
+
+### *Event TODO*
+
+### *Set innerHtml TODO*
+
+### *context*
