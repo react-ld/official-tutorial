@@ -8,22 +8,20 @@
   - [ES6 Classes  export class Name extends React.Component](#es6-classes--export-class-name-extends-reactcomponent)
   - [纯函数（pure funciton） stateless-functions](#纯函数pure-funciton-stateless-functions)
 - [小知识点 ](#小知识点 )
-  - [className 和 style ](#className 和 style )
-  - [JXS 注释 ](#JXS 注释 )
-  - [DOM 操作 ](#DOM 操作 )
-  - [修改组件 state ](#修改组件 state )
-  - [JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理](#JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理)
+  - [className 和 style ](#classname-和-style )
+  - [JXS 注释 ](#jxs-注释)
+  - [DOM 操作 ](#dom-操作)
+  - [修改组件 state ](#修改组件-state)
+  - [JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理](#jsx-语法不支持-if-else-使用三元运算符或者使用变量独立处理)
 - [生命周期 ](#生命周期 )
-  - [Mounting: componentWillMount ](#生命周期 )
-  - [Mounting: componentDidMount ](#生命周期 )
-  - [Updating: componentWillReceiveProps(nextProps) ](#生命周期 )
-  - [Updating: shouldComponentUpdate(nextProps, nextState) ](#生命周期 )
-  - [Updating: componentWillUpdate(nextProps, nextState) ](#生命周期 )
-  - [Updating: componentDidUpdate(prevProps, prevState) ](#生命周期 )
-  - [Unmounting: componentWillUnmount ](#生命周期 )
-  - [render() ](#生命周期 )
-
-
+  - [Mounting: componentWillMount ](#mounting-componentwillmount)
+  - [Mounting: componentDidMount ](#mounting-componentdidmount)
+  - [Updating: componentWillReceiveProps(nextProps) ](#updating-componentwillreceivepropsnextprops)
+  - [Updating: shouldComponentUpdate(nextProps, nextState) ](#updating-shouldcomponentupdatenextprops-nextstate )
+  - [Updating: componentWillUpdate(nextProps, nextState) ](#updating-componentwillupdatenextprops-nextstate)
+  - [Updating: componentDidUpdate(prevProps, prevState) ](#updating-componentdidupdateprevprops-prevstate)
+  - [Unmounting: componentWillUnmount ](#unmounting-componentwillunmount)
+  - [render() ](#render )
 
 ### 快速开始
 
@@ -182,142 +180,142 @@ ReactDOM.render(
 
 #### **className 和 style**
 
-    ```js
-      render(){
-        return (
-          <div className="demo-class" style={{
-            height: "100px",
-            width: "100px",
-            fontSize: "12px"
-          }}>
-          </div>
-        )
-      }
-      render(){
-        const styleObj = {
-          height: "100px",
-          width: "100px",
-          fontSize: "12px"
-        }
-        return (
-          <div className="demo-class" style={styleObj}>
-          </div>
-        )
-      }
-    ```
+```js
+  render(){
+    return (
+      <div className="demo-class" style={{
+        height: "100px",
+        width: "100px",
+        fontSize: "12px"
+      }}>
+      </div>
+    )
+  }
+  render(){
+    const styleObj = {
+      height: "100px",
+      width: "100px",
+      fontSize: "12px"
+    }
+    return (
+      <div className="demo-class" style={styleObj}>
+      </div>
+    )
+  }
+```
 
 #### **JXS 注释**
 
-    ```js
-      render(){
-        return (
-          <div>
-            {/* 这里面的内容都是注释 */}
-          </div>
-        )
-      }
-    ```
+```js
+  render(){
+    return (
+      <div>
+        {/* 这里面的内容都是注释 */}
+      </div>
+    )
+  }
+```
 
 #### **DOM 操作**
 
-    [ReactDOM.findDOMNode](https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode)
+[ReactDOM.findDOMNode](https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode)
     
-    ```js
-      export default class image extends Component {
-          constructor(props) {
-            super(props)
-          }
-          componentDidMount(){
-            //获取组件根 html DOM 元素对象
-            let dom = findDOMNode(this)
-          }
-          render() {
-            retrun <img/>
-          }
+```js
+  export default class image extends Component {
+      constructor(props) {
+        super(props)
       }
-    ```
-    [Refs to Comments](https://facebook.github.io/react/docs/more-about-refs.html)
-    
-    ```js
-      export default class Demo extends Component {
-          constructor(props) {
-            super(props)
-          }
-          componentDidMount(){
-            //这是该组件的根 DOM 对象
-            console.info(this.refs.comRootDom);
-            this._input.focus();
-          }
-          render() {
-            retrun (
-              <div ref="comRootDom">
-                {/* ref 还支持函数形式，函数输入参数为 DOM 对象 */}
-                <TextInput ref={(input) => this._input = input} />
-              </div>
-            )
-          }
+      componentDidMount(){
+        //获取组件根 html DOM 元素对象
+        let dom = findDOMNode(this)
       }
-    ```
+      render() {
+        retrun <img/>
+      }
+  }
+```
+[Refs to Comments](https://facebook.github.io/react/docs/more-about-refs.html)
+
+```js
+  export default class Demo extends Component {
+      constructor(props) {
+        super(props)
+      }
+      componentDidMount(){
+        //这是该组件的根 DOM 对象
+        console.info(this.refs.comRootDom);
+        this._input.focus();
+      }
+      render() {
+        retrun (
+          <div ref="comRootDom">
+            {/* ref 还支持函数形式，函数输入参数为 DOM 对象 */}
+            <TextInput ref={(input) => this._input = input} />
+          </div>
+        )
+      }
+  }
+```
 #### **修改组件 state**
 
-    要想修改 this.state 必须通过 this.setState 函数进行设置
-    ```js
-      constructor(){
-        super()
-        this.state = {
-          data: [],
-          counter: 0,
-          other: 1
-        }
-      }
-      onClick(){
-        //以下代码只会改版 this.state.counter 而不会影响 this.state.other 和 this.state.data
-        this.setState({counter: this.state.counter + 1;
-      }
-      render(){
-        <div className="commentBox">
-          <h1>Comments</h1>
-          <span>other {this.state.other}</span>
-          <span onClick={
-            //bind 是 bind 函数在 ECMA-262 第五版才被加入（即ES5） 语法中函数的新方法用于绑定函数作用域的
-            this.onClick.bind(this)
-          }>counter = {this.state.counter}</span>
-          <CommentList data={this.state.data} />
-          <CommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)} />
-        </div>
-      }
-    ```
-    [MDN 对于 bind 的介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+要想修改 this.state 必须通过 this.setState 函数进行设置
+```js
+  constructor(){
+    super()
+    this.state = {
+      data: [],
+      counter: 0,
+      other: 1
+    }
+  }
+  onClick(){
+    //以下代码只会改版 this.state.counter 而不会影响 this.state.other 和 this.state.data
+    this.setState({counter: this.state.counter + 1;
+  }
+  render(){
+    <div className="commentBox">
+      <h1>Comments</h1>
+      <span>other {this.state.other}</span>
+      <span onClick={
+        //bind 是 bind 函数在 ECMA-262 第五版才被加入（即ES5） 语法中函数的新方法用于绑定函数作用域的
+        this.onClick.bind(this)
+      }>counter = {this.state.counter}</span>
+      <CommentList data={this.state.data} />
+      <CommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)} />
+    </div>
+  }
+```
+[MDN 对于 bind 的介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
 #### **JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理**
 
-    JSX 中使用三元运算符
-    ```js
-      render(){
-        return (
-          <div>
-            {
-              this.state.isShow ? <span>show Text</span> : ""
-            }
-          </div>
-        )
-      }
-    ```
-
-    使用变量独立处理
-    ```js
-      render(){
-        let content = "";
-        if(this.state.isShow){
-          content = <span>show Text</span>
+JSX 中使用三元运算符
+```js
+  render(){
+    return (
+      <div>
+        {
+          this.state.isShow ? <span>show Text</span> : ""
         }
-        return (
-          <div>
-            {content}
-          </div>
-        )
-      }
-    ```
+      </div>
+    )
+  }
+```
+
+使用变量独立处理
+```js
+  render(){
+    let content = "";
+    if(this.state.isShow){
+      content = <span>show Text</span>
+    }
+    return (
+      <div>
+        {content}
+      </div>
+    )
+  }
+```
 
 ### 生命周期
 对于生命周期的理解很重要，生命周期贯彻 react 组件的整个使用过程
@@ -325,71 +323,70 @@ ReactDOM.render(
 
 #### **Mounting: componentWillMount**
 
-    可以在这个函数中发情数据请求，此时进行 setState() render() 将只执行一次
+可以在这个函数中发情数据请求，此时进行 setState() render() 将只执行一次
 
 #### **Mounting: componentDidMount**
 
-    第一次 render() 执行后，此时可以读取对真实DOM进行相关操作
+第一次 render() 执行后，此时可以读取对真实DOM进行相关操作
 
 #### **Updating: componentWillReceiveProps(nextProps)**
 
-    当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
+当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
 
-    | 变量 | 说明 |
-    | --- | --- |
-    | this.props | 老的 props |
-    | nextProps | 新的 props |
+| 变量 | 说明 |
+| --- | --- |
+| this.props | 老的 props |
+| nextProps | 新的 props |
 
 #### **Updating: shouldComponentUpdate(nextProps, nextState)**
   
-    如果配置该函数的话必须明确的返回 true 或者 false ，返回决定了本次变化是否引起组件重绘（及执行 render()）。
-    在此函数中可以进行逻辑性的判断来减少组件重绘的次数
+如果配置该函数的话必须明确的返回 true 或者 false ，返回决定了本次变化是否引起组件重绘（及执行 render()）。
+在此函数中可以进行逻辑性的判断来减少组件重绘的次数
 
 #### **Updating: componentWillUpdate(nextProps, nextState)**
   
-    请不要在此函数中执行修改 state 的逻辑（即调用 setState 函数），如有需要请在 componentWillReceiveProps 中进行修改设置
+请不要在此函数中执行修改 state 的逻辑（即调用 setState 函数），如有需要请在 componentWillReceiveProps 中进行修改设置
 
 #### **Updating: componentDidUpdate(prevProps, prevState)**
   
-    完成组件更新（即完成本次更新重绘 render() 执行之后），此时可以进行 DOM 操作
+完成组件更新（即完成本次更新重绘 render() 执行之后），此时可以进行 DOM 操作
 
 #### **Unmounting: componentWillUnmount**
   
-    组件被销毁时调用，已经进行各种销毁逻辑
+组件被销毁时调用，已经进行各种销毁逻辑
 
 #### **render()**
     
-    必须返回唯一包裹组件
+必须返回唯一包裹组件
 
-    ```js
-      render(){
-        retrun (
-          <div>
-          </div>
-        )
-      }
-      // good
-      render(){
-        retrun (
-          <div>
-          </div>
-          {/* */}
-        )
-      }
-      // error
-      render(){
-        retrun (
-          <div>
-          </div>
-          <div>
-          </div>
-        )
-      }
-      // error
-    ```
+```js
+  render(){
+    retrun (
+      <div>
+      </div>
+    )
+  }
+  // good
+  render(){
+    retrun (
+      <div>
+      </div>
+      {/* */}
+    )
+  }
+  // error
+  render(){
+    retrun (
+      <div>
+      </div>
+      <div>
+      </div>
+    )
+  }
+  // error
+```
 
-参考链接：
-https://facebook.github.io/react/docs/component-specs.html
+参考链接：https://facebook.github.io/react/docs/component-specs.html
 
 ### *Event TODO*
 
