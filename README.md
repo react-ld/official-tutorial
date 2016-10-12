@@ -242,7 +242,7 @@ http://codecloud.net/12913.html
     当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
 
     | 变量 | 说明 |
-    | -- | -- |
+    | --- | --- |
     | this.props | 老的 props |
     | nextProps | 新的 props |
 
