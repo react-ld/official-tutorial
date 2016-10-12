@@ -171,9 +171,13 @@ ReactDOM.render(
 ```
 
 参考链接：
+
 [component-specs](https://facebook.github.io/react/docs/component-specs.html)
+
 [reusable-components](https://facebook.github.io/react/docs/reusable-components.html)
+
 [选择组件类型](http://codecloud.net/12913.html)
+
 [阮一峰 ES6 教程 class](http://es6.ruanyifeng.com/#docs/class)
 
 ### 小知识点
