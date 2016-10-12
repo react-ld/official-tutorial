@@ -1,4 +1,20 @@
 # React 入门基础
+### 目录
+- [快速开始](#快速开始)
+  - [局限性（不支持功能）](#局限性（不支持功能）)
+  - [本项目简介 ](#本项目简介 )
+- [三种组件类型 ](#三种组件类型 )
+  - [React.createClass](#React.createClass)
+  - [ES6 Classes  export class Name extends React.Component](#ES6 Classes  export class Name extends React.Component)
+  - [纯函数（pure funciton） stateless-functions](#纯函数（pure funciton） stateless-functions)
+- [小知识点 ](#小知识点 )
+  - [className 和 style ](#className 和 style )
+  - [JXS 注释 ](#JXS 注释 )
+  - [DOM 操作 ](#DOM 操作 )
+  - [修改组件 state ](#修改组件 state )
+  - [JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理](#JSX 语法不支持 IF-ELSE 使用三元运算符或者使用变量独立处理)
+- [生命周期 ](#生命周期 )
+
 
 ### 快速开始
 
@@ -31,7 +47,7 @@
 #### 本项目简介
   本项目就是使用[create-react-app](https://github.com/facebookincubator/create-react-app.git)创建的一个项目。主要实现了官方[tutorial](https://facebook.github.io/react/docs/tutorial.html)[react-tutorial](https://github.com/reactjs/react-tutorial)代码使用 ES5 Classes 方式来进行实现，可以进行一个比较。其中省略了服务器端数据请求的逻辑。
 
-### 三种组件类型 
+### 三种组件类型
 
 1. **React.createClass**
  
