@@ -53,6 +53,9 @@ export default class App extends Component{
       this.setState({
         data: data
       })
+      // this.setState({
+      //   data: this.state.data.push(data)
+      // })
     }, 3000)
   }
 

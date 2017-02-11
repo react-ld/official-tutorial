@@ -52,12 +52,13 @@
 * Hot reloading of components.热更新 本人自己开发的支持 redux hot reloading 项目[react-started](https://github.com/lidianhao123/react-started)
 
 #### 本项目简介
-  本项目就是使用[create-react-app](https://github.com/facebookincubator/create-react-app.git)创建的一个项目。主要实现了官方[tutorial](https://facebook.github.io/react/docs/tutorial.html)[react-tutorial](https://github.com/reactjs/react-tutorial)代码使用 ES5 Classes 方式来进行实现，可以进行一个比较。其中省略了服务器端数据请求的逻辑。
+  本项目就是使用[create-react-app](https://github.com/facebookincubator/create-react-app.git)创建的一个项目。使用 ES6 实现了官方[tutorial](https://facebook.github.io/react/docs/tutorial.html) [react-tutorial](https://github.com/reactjs/react-tutorial) 项目，进行一个比较。其中省略了服务器端数据请求的逻辑。
 
 ### 三种组件类型
 
 #### **React.createClass**
- 
+这种方式在早期版本的 React 组件中比较常见。
+
 ```js
 import React, { Component } from 'react'
 
@@ -150,6 +151,44 @@ App.defaultProps = {
 };
 //类属性
 App.value = 1
+```
+
+ES7 [transform-class-properties](http://babeljs.io/docs/plugins/transform-class-properties/) 类的静态属性和示例属性, 需要 babel transform-class-properties 插件支持
+.babelrc 配置如下两种
+```json
+{
+  "presets": [
+    "es2015",
+    "react",
+    "stage-1"
+  ],
+  // or
+  "plugins": ["transform-class-properties"]
+}
+```
+
+```js
+export default class App extends Component{
+  //类的静态属性 定义 props 参数类型
+  static propTypes = {
+    name: PropTypes.string
+  }
+  static defaultProps = {
+    name: 'Mary'
+  }
+  static value = 1;
+  //简化后实例属性可支持如下写法
+  state = {
+    data: []
+  }
+  //简化 bind 的写法
+  handleCommentSubmit = (comment) => {
+    this.setState({
+      data: [...this.state.data, comment]
+    })
+  }
+  ...
+}
 ```
 
 #### **纯函数（pure funciton） stateless-functions**
@@ -335,7 +374,7 @@ JSX 中使用三元运算符
 
 #### **Updating: componentWillReceiveProps(nextProps)**
 
-当组件 props 修改（即父组件传递参数变化），在第一次 render() 过程中不执行此函数
+只有当组件 props 修改（即父组件传递参数变化）时才会调用该函数，在第一次 render() 过程中不执行此函数
 
 | 变量 | 说明 |
 | --- | --- |
@@ -392,8 +431,19 @@ JSX 中使用三元运算符
 
 参考链接：https://facebook.github.io/react/docs/component-specs.html
 
-### *Event TODO*
+### Set innerHtml TODO
+因为动态设置 HTML 存在 XSS 攻击危险，所有 React 特意使用下面的方式进行
+[dangerouslysetinnerhtml](https://facebook.github.io/react/docs/dom-elements.html#dangerouslysetinnerhtml)
+```js
+function createMarkup() {
+  return {__html: 'First &middot; Second'};
+}
 
-### *Set innerHtml TODO*
+function MyComponent() {
+  return <div dangerouslySetInnerHTML={createMarkup()} />;
+}
+```
+
+### *Event TODO*
 
 ### *context*
