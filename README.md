@@ -154,7 +154,7 @@ App.value = 1
 ```
 
 ES7 [transform-class-properties](http://babeljs.io/docs/plugins/transform-class-properties/) 类的静态属性和示例属性, 需要 babel transform-class-properties 插件支持
-.babelrc 配置如下两种
+.babelrc 配置如下两种 presets 或者 plugins
 ```json
 {
   "presets": [
@@ -162,7 +162,6 @@ ES7 [transform-class-properties](http://babeljs.io/docs/plugins/transform-class-
     "react",
     "stage-1"
   ],
-  // or
   "plugins": ["transform-class-properties"]
 }
 ```
